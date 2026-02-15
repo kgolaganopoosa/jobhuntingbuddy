@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Hunting Buddy | Future-Proof Your Career</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0066ff;
+            --accent: #32cd32;
+            --dark: #0a0a0f;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f0f0f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- Dynamic Background --- */
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(0, 102, 255, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(50, 205, 50, 0.1) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        /* --- Navigation & Burger --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 2000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .burger span {
+            width: 28px;
+            height: 3px;
+            background: #fff;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        /* --- Hero Section --- */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        header h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            line-height: 0.9;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- Bento Grid Sections --- */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        section {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 3rem;
+            border-radius: 32px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.4s ease;
+        }
+
+        section:hover {
+            transform: translateY(-10px);
+            border-color: rgba(50, 205, 50, 0.3);
+        }
+
+        #home, #get-started { grid-column: span 2; }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        /* --- Buttons --- */
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 1.2rem 2.5rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(50, 205, 50, 0.4);
+        }
+
+        /* --- Mobile Optimization --- */
+        @media (max-width: 900px) {
+            main { grid-template-columns: 1fr; }
+            #home, #get-started { grid-column: span 1; }
+            
+            .burger { display: flex; }
+            
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 80px;
+                flex-direction: column;
+                background: rgba(10, 10, 15, 0.95);
+                width: 100%;
+                text-align: center;
+                padding: 3rem 0;
+                transition: 0.5s;
+                backdrop-filter: blur(20px);
+            }
+
+            .nav-links.active { right: 0; }
+        }
+
+        ul li {
+            list-style: none;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        ul li::before {
+            content: '✓';
+            color: var(--accent);
+            font-weight: 800;
+        }
+
+        footer {
+            padding: 5rem 2rem;
+            text-align: center;
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <nav>
+        <div class="logo">JH BUDDY.</div>
+        <div class="burger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="#home" onclick="toggleMenu()">Home</a>
+            <a href="#about" onclick="toggleMenu()">About</a>
+            <a href="#services" onclick="toggleMenu()">Services</a>
+            <a href="#pricing" onclick="toggleMenu()">Pricing</a>
+            <a href="#get-started" onclick="toggleMenu()">Join</a>
+        </div>
+    </nav>
+
+    <header>
+        <p style="text-transform: uppercase; letter-spacing: 4px; margin-bottom: 1rem;">2026 Career Tech</p>
+        <h1>Job Hunting <br><span class="gradient-text">Buddy</span></h1>
+        <p style="max-width: 600px; font-size: 1.2rem;">Stop scrolling. Start applying. We deliver curated opportunities directly to your WhatsApp.</p>
+        <a href="#get-started" class="cta-button">Secure Your Spot — R95/mo</a>
+    </header>
+
+    <main>
+        <section id="home">
+            <h2>The Hustle Simplified.</h2>
+            <p>We partner with you to find real job opportunities online. Every day, we send you 1–5 carefully selected job application links directly to your WhatsApp and email.</p>
+        </section>
+
+        <section id="about">
+            <h2>The Mission.</h2>
+            <p>Founded by Kgolagano in Pretoria. We’re cutting through the noise of broken job portals to help South Africa work. Modern jobs for a modern generation.</p>
+        </section>
+
+        <section id="services">
+            <h2>The Tech.</h2>
+            <ul>
+                <li>Curated WhatsApp Drops</li>
+                <li>Industry Matching</li>
+                <li>Interview Trackers</li>
+                <li>Upskilling (Coming Soon)</li>
+            </ul>
+        </section>
+
+        <section id="pricing">
+            <h2>The Cost.</h2>
+            <p style="font-size: 3rem; font-weight: 800; color: var(--accent);">R95<span style="font-size: 1rem; color: #fff;">/month</span></p>
+            <p>No contracts. No stress. Just results. Cancel whenever you land that dream role.</p>
+        </section>
+
+        <section id="get-started" style="text-align: center; background: linear-gradient(to bottom right, rgba(0,102,255,0.1), rgba(50,205,50,0.1));">
+            <h2>Ready to level up?</h2>
+            <p>Click below to open a direct line to Kgolagano. We’ll get your profile set up in minutes.</p>
+            <a href="https://wa.me/+27824598656?text=Hi%20Kgolagano!%20I'm%20ready%20to%20start." class="cta-button">Chat on WhatsApp</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Job Hunting Buddy. Pretoria, ZA.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
